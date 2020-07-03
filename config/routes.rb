@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     get "/products" => "products#index"
-
-    post "/products/new" => "products#create"
+    get "/products/:id" => "products#show"
+    post "/products" => 
 
   end
 end
