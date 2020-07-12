@@ -1,7 +1,9 @@
 class Api::ProductsController < ApplicationController
   
   def index
-    @product = Product.all
+    @product = Product.search(params[:search], params)
+
+    
     render 'index.json.jb'
   end
   
@@ -12,8 +14,13 @@ class Api::ProductsController < ApplicationController
       description: params[:description],
       image_url: params[:image_url]
     )
-    @product.save
-    render 'create.json.jb'
+    if @product.save
+      render 'create.json.jb'
+    else
+      # sad path
+      # render 'errors.json.jb', status :unprocessable_entity
+      render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -27,8 +34,11 @@ class Api::ProductsController < ApplicationController
     @product.price = params[:price] || @product.price
     @product.description = params[:description] || @product.description
     @product.image_url = params [:image_url] || @product.image_url
-    @product.save
-    render 'show.json.jb'
+    if @product.save
+      render 'show.json.jb'
+    else
+      render json: {errors: @product.errors.full_messages}, status: :unprocesssable_entity
+    end
   end
 
   def destroy

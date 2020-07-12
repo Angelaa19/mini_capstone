@@ -4,6 +4,9 @@
   description: product.description,
   image_url: product.image_url,
   formatted: {
-    hello: product.hello
+    # hello: product.hello
+    is_discounted?: product.is_discounted?,
+    tax: product.tax,
+    total: product.total
   }
 }
