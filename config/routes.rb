@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     post "/products/:id" => "products#create"
     get "/products/:id" => "products#show"
 
+    post "/users" => "users#create"
+
   end
 end
