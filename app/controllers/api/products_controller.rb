@@ -25,6 +25,7 @@ class Api::ProductsController < ApplicationController
 
   def show
     @product = Product.where(id: params[:id])
+    p current_user
     render 'show.json.jb'
   end
 
