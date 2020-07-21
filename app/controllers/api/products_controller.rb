@@ -1,7 +1,7 @@
 class Api::ProductsController < ApplicationController
   
   def index
-    @products = Product.where(params[:search], params[:id])
+    @products = Product.all
     render 'index.json.jb'
   end
   
